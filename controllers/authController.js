@@ -14,12 +14,14 @@ exports.register = async (req, res) => {
     const exists = await User.findOne({ nim_nls });
     if (exists) return res.status(400).json({ message: 'NIM/NLS sudah terdaftar' });
 
-    const user = await User.create({ name, nim_nls, password, role });
+    const user = new User({ name, nim_nls, password, role });
+    await user.save();
     res.status(201).json({ token: signToken(user), user: { name: user.name, nim_nls: user.nim_nls, role: user.role } });
   } catch (err) {
+    console.error('FULL ERROR:', err);
     res.status(500).json({ message: err.message });
   }
-};
+}; 
 
 exports.login = async (req, res) => {
   try {
