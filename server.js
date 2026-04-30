@@ -7,6 +7,7 @@ const beritaRoutes = require('./routes/beritaRoutes');
 const bukuRoutes   = require('./routes/bukuRoutes');
 const modulRoutes  = require('./routes/modulRoutes');
 const imageRoutes  = require('./routes/imageRoutes');
+const userRoutes   = require('./routes/userRoutes');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use('/api/berita', beritaRoutes);
 app.use('/api/buku',   bukuRoutes);
 app.use('/api/modul',  modulRoutes);
 app.use('/api/image',  imageRoutes);
+app.use('/api/user',   userRoutes);
 
 app.get('/', (_, res) => res.send('API running'));
 
