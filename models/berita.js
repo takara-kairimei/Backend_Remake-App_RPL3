@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 const BeritaSchema = new mongoose.Schema({
-  cloudinaryId: { type: String, ref: 'Image' }, 
-  content:      { type: String, required: true },
   title:        { type: String, required: true },
-  createdBy:    { type: String, ref: 'User' }, 
+  summary:      { type: String, required: true }, 
+  content:      { type: String, required: true }, 
+  imageUrl:     { type: String, default: '' },    
+  cloudinaryId: { type: String, default: '' },    
 }, { timestamps: true });
 
 module.exports = mongoose.model('Berita', BeritaSchema);

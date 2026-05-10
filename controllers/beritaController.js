@@ -1,16 +1,18 @@
 const Berita = require('../models/berita');
 
-// Get semua berita
+// Get semua berita 
 exports.getAllBerita = async (req, res) => {
   try {
-    const berita = await Berita.find().sort({ createdAt: -1 });
+    const berita = await Berita.find()
+      .select('title summary imageUrl createdBy createdAt')
+      .sort({ createdAt: -1 });
     res.json(berita);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-// Get satu berita
+// Get detail satu berita 
 exports.getBeritaById = async (req, res) => {
   try {
     const berita = await Berita.findById(req.params.id);
@@ -24,10 +26,12 @@ exports.getBeritaById = async (req, res) => {
 // Buat berita baru
 exports.createBerita = async (req, res) => {
   try {
-    const { title, content, cloudinaryId } = req.body;
+    const { title, summary, content, imageUrl, cloudinaryId } = req.body;
     const berita = new Berita({
       title,
+      summary,
       content,
+      imageUrl,
       cloudinaryId,
       createdBy: req.user.nim_nls,
     });
