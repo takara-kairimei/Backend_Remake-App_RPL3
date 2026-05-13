@@ -51,7 +51,8 @@ exports.updateUser = async (req, res) => {
     if (name)    user.name    = name;
     if (nim_nls) user.nim_nls = nim_nls;
     if (role)    user.role    = role;
-    if (password) {
+    if (password) 
+    {
       user.password = await bcrypt.hash(password, 10);
     }
 
