@@ -7,6 +7,7 @@ const beritaRoutes      = require('./routes/beritaRoutes');
 const bukuRoutes        = require('./routes/bukuRoutes');
 const modulRoutes       = require('./routes/modulRoutes');
 const imageRoutes       = require('./routes/imageRoutes');
+const pdfRoutes         = require('./routes/pdfRoutes');
 const userRoutes        = require('./routes/userRoutes');
 const pengumumanRoutes  = require('./routes/pengumumanRoutes');
 
@@ -27,6 +28,7 @@ app.use('/api/berita',     beritaRoutes);
 app.use('/api/buku',       bukuRoutes);
 app.use('/api/modul',      modulRoutes);
 app.use('/api/image',      imageRoutes);
+app.use('/api/pdf',        pdfRoutes);
 app.use('/api/user',       userRoutes);
 app.use('/api/pengumuman', pengumumanRoutes);
 
