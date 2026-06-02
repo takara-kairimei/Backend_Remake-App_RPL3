@@ -4,8 +4,7 @@ const Pengumuman = require('../models/pengumuman');
 exports.getAllPengumuman = async (req, res) => {
   try {
     const pengumuman = await Pengumuman.find()
-      .select('title createdAt')
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 }); 
     res.json(pengumuman);
   } catch (err) {
     res.status(500).json({ message: err.message });
