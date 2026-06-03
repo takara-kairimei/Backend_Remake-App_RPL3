@@ -16,7 +16,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-connectDB();
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error('Database connection error:', error);
+    res.status(500).json({ message: 'Gagal terhubung ke Database' });
+  }
+});
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
@@ -38,6 +46,5 @@ if (require.main === module) {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }
-
 
 module.exports = app;
