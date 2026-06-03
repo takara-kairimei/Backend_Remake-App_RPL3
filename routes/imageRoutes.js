@@ -5,7 +5,7 @@ const { verifyToken, allowRoles } = require('../middleware/auth');
 const { uploadImage, getAllImage, deleteImage } = require('../controllers/imageController');
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/'),
+  destination: (req, file, cb) => cb(null, 'uploads/img/'),
   filename:    (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
 });
 
