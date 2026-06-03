@@ -1,6 +1,5 @@
 const cloudinary = require('../config/cloudinary');
-const Pdf = require('../models/Pdf');
-
+const Pdf = require('../models/Pdf'); 
 exports.uploadPdf = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Tidak ada file yang diupload' });
@@ -13,14 +12,14 @@ exports.uploadPdf = async (req, res) => {
       resource_type: 'raw',       
     });
 
-    const pdf = new Pdf({
+    const newPdf = new Pdf({
       cloudinaryId: result.public_id,
       name: req.file.originalname,
       url: result.secure_url,
     });
 
-    await pdf.save();
-    res.status(201).json(pdf);
+    await newPdf.save();
+    res.status(201).json(newPdf);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
