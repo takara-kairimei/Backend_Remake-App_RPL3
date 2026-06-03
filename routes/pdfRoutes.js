@@ -1,13 +1,7 @@
 const router   = require('express').Router();
 const multer   = require('multer');
-const path     = require('path');
 const { verifyToken, allowRoles } = require('../middleware/auth');
 const { uploadPdf, getAllPdf, downloadPdf, deletePdf } = require('../controllers/pdfController');
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/pdfs/'), 
-  filename:    (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
-});
 
 const fileFilter = (req, file, cb) => {
   if (file.mimetype === 'application/pdf') {
@@ -17,12 +11,11 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-
 const upload = multer({ 
-  storage, 
+  storage: multer.memoryStorage(), 
   fileFilter,
   limits: { 
-    fileSize: 200 * 1024 * 1024 
+    fileSize: 200 * 1024 * 1024 // 200MB
   } 
 });
 

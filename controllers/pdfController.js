@@ -5,9 +5,12 @@ exports.uploadPdf = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Tidak ada file yang diupload' });
 
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: 'backend_app/pdfs', // Pisahkan folder di cloudinary juga
-      resource_type: 'raw',       // Wajib agar Cloudinary tidak error saat upload PDF
+    const b64 = Buffer.from(req.file.buffer).toString("base64");
+    let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+
+    const result = await cloudinary.uploader.upload(dataURI, {
+      folder: 'backend_app/pdfs',
+      resource_type: 'raw',       
     });
 
     const pdf = new Pdf({

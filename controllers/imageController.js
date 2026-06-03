@@ -6,7 +6,11 @@ exports.uploadImage = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Tidak ada file yang diupload' });
 
-    const result = await cloudinary.uploader.upload(req.file.path, {
+    
+    const b64 = Buffer.from(req.file.buffer).toString("base64");
+    let dataURI = "data:" + req.file.mimetype + ";base64," + b64;
+
+    const result = await cloudinary.uploader.upload(dataURI, {
       folder: 'backend_app',
     });
 

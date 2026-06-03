@@ -1,15 +1,9 @@
 const router   = require('express').Router();
 const multer   = require('multer');
-const path     = require('path');
 const { verifyToken, allowRoles } = require('../middleware/auth');
 const { uploadImage, getAllImage, deleteImage } = require('../controllers/imageController');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'uploads/img/'),
-  filename:    (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname)),
-});
-
-const upload = multer({ storage });
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.get('/',       verifyToken, getAllImage);
 router.post('/upload', verifyToken, allowRoles('Guru', 'Admin', 'Staff'), upload.single('image'), uploadImage);
