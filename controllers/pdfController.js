@@ -1,5 +1,5 @@
 const cloudinary = require('../config/cloudinary');
-const Pdf = require('../models/Pdf'); 
+const Pdf = require('../models/pdf'); 
 exports.uploadPdf = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Tidak ada file yang diupload' });
