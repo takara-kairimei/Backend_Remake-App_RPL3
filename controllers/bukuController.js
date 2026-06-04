@@ -2,7 +2,7 @@ const Buku = require('../models/buku');
 
 exports.getAllBuku = async (req, res) => {
   try {
-    const buku = await Buku.find().sort({ createdAt: -1 });
+    const buku = await Buku.find().populate('pdfId').sort({ createdAt: -1 });
     res.json(buku);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -11,7 +11,7 @@ exports.getAllBuku = async (req, res) => {
 
 exports.getBukuById = async (req, res) => {
   try {
-    const buku = await Buku.findById(req.params.id);
+    const buku = await Buku.findById(req.params.id).populate('pdfId');
     if (!buku) return res.status(404).json({ message: 'Buku tidak ditemukan' });
     res.json(buku);
   } catch (err) {
@@ -21,12 +21,12 @@ exports.getBukuById = async (req, res) => {
 
 exports.createBuku = async (req, res) => {
   try {
-    const { name, description, year, cloudinaryId } = req.body;
+    const { name, description, year, pdfId } = req.body;
     const buku = new Buku({
       name,
       description,
       year,
-      cloudinaryId,
+      pdfId,
       createdBy: req.user.nim_nls,
     });
     await buku.save();
@@ -42,7 +42,7 @@ exports.updateBuku = async (req, res) => {
       req.params.id,
       req.body,
       { new: true }
-    );
+    ).populate('pdfId');
     if (!buku) return res.status(404).json({ message: 'Buku tidak ditemukan' });
     res.json(buku);
   } catch (err) {
