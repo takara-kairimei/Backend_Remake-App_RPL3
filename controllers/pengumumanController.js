@@ -1,6 +1,5 @@
 const Pengumuman = require('../models/pengumuman');
 
-// Get semua pengumuman
 exports.getAllPengumuman = async (req, res) => {
   try {
     const pengumuman = await Pengumuman.find()
@@ -11,7 +10,6 @@ exports.getAllPengumuman = async (req, res) => {
   }
 };
 
-// Get detail pengumuman
 exports.getPengumumanById = async (req, res) => {
   try {
     const pengumuman = await Pengumuman.findById(req.params.id);
@@ -22,7 +20,6 @@ exports.getPengumumanById = async (req, res) => {
   }
 };
 
-// Buat pengumuman baru
 exports.createPengumuman = async (req, res) => {
   console.log('BODY:', req.body);
   console.log('USER:', req.user);
@@ -41,7 +38,6 @@ exports.createPengumuman = async (req, res) => {
   }
 };
 
-// Update pengumuman
 exports.updatePengumuman = async (req, res) => {
   try {
     const pengumuman = await Pengumuman.findByIdAndUpdate(
@@ -56,7 +52,6 @@ exports.updatePengumuman = async (req, res) => {
   }
 };
 
-// Hapus pengumuman
 exports.deletePengumuman = async (req, res) => {
   try {
     const pengumuman = await Pengumuman.findByIdAndDelete(req.params.id);

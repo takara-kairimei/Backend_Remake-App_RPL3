@@ -1,6 +1,5 @@
 const Berita = require('../models/berita');
 
-// Get semua berita 
 exports.getAllBerita = async (req, res) => {
   try {
     const berita = await Berita.find()
@@ -12,7 +11,6 @@ exports.getAllBerita = async (req, res) => {
   }
 };
 
-// Get detail satu berita 
 exports.getBeritaById = async (req, res) => {
   try {
     const berita = await Berita.findById(req.params.id);
@@ -23,7 +21,6 @@ exports.getBeritaById = async (req, res) => {
   }
 };
 
-// Buat berita baru
 exports.createBerita = async (req, res) => {
   try {
     const { title, summary, content, imageUrl, cloudinaryId } = req.body;
@@ -42,7 +39,6 @@ exports.createBerita = async (req, res) => {
   }
 };
 
-// Update berita
 exports.updateBerita = async (req, res) => {
   try {
     const berita = await Berita.findByIdAndUpdate(
@@ -57,7 +53,6 @@ exports.updateBerita = async (req, res) => {
   }
 };
 
-// Hapus berita
 exports.deleteBerita = async (req, res) => {
   try {
     const berita = await Berita.findByIdAndDelete(req.params.id);

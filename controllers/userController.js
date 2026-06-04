@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 
-// Get semua user
 exports.getAllUser = async (req, res) => {
   try {
     const users = await User.find().select('-password');
@@ -11,7 +10,6 @@ exports.getAllUser = async (req, res) => {
   }
 };
 
-// Get user by ID
 exports.getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
@@ -22,7 +20,6 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// Buat akun baru (by admin)
 exports.createUser = async (req, res) => {
   try {
     const { name, nim_nls, password, role } = req.body;
@@ -40,7 +37,6 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// Edit kredensial user
 exports.updateUser = async (req, res) => {
   try {
     const { name, nim_nls, password, role } = req.body;

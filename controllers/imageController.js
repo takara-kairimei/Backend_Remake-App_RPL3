@@ -1,7 +1,6 @@
 const cloudinary = require('../config/cloudinary');
 const Image = require('../models/image');
 
-// Upload image
 exports.uploadImage = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ message: 'Tidak ada file yang diupload' });
@@ -27,7 +26,7 @@ exports.uploadImage = async (req, res) => {
   }
 };
 
-// Get semua image
+
 exports.getAllImage = async (req, res) => {
   try {
     const images = await Image.find().sort({ createdAt: -1 });
@@ -37,7 +36,7 @@ exports.getAllImage = async (req, res) => {
   }
 };
 
-// Hapus image
+
 exports.deleteImage = async (req, res) => {
   try {
     const image = await Image.findById(req.params.id);
