@@ -5,7 +5,7 @@ const BukuSchema = new mongoose.Schema({
   name:        { type: String, required: true },
   description: { type: String },
   year:        { type: Number },
-  pdfId:       { type: mongoose.Schema.Types.ObjectId, ref: 'Pdf' },
+  pdfUrl:      { type: String },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Buku', BukuSchema);
